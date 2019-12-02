@@ -3,9 +3,10 @@ import season7_test3.Boat;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class Dock extends Thread{
+public class Dock {
     private int id;
     private BlockingQueue<Boat> queue = new LinkedBlockingQueue<>(5);
+
 
     public Dock(int id) {
         this.id = id;
@@ -29,9 +30,7 @@ public class Dock extends Thread{
         //if something went wrong return null
         return null;
     }
-
-    @Override
-    public void run() {
-
+    public boolean isEmpty (){
+        return this.queue.isEmpty();
     }
 }

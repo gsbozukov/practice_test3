@@ -12,12 +12,15 @@ public class Boat extends Thread{
     public static AtomicInteger globalID = new AtomicInteger(0);
     private String name;
     private ArrayList<Package> packages = new ArrayList<>();
+    private boolean isUnloaded;
 
     //create a boat, automatically generates a package
 
     public Boat() {
         this.name = "Boat"+globalID.incrementAndGet();
         mainPort = Port.getInstance();
+        System.out.println("MY PORT IS "+this.mainPort);
+        this.isUnloaded = false;
     }
 
     @Override
@@ -28,9 +31,16 @@ public class Boat extends Thread{
         }
         Random r = new Random();
         mainPort.getOnDock(this, r.nextInt(5));
+        while (!isUnloaded){
+            //keep existing
+        }
     }
 
     public ArrayList<Package> getPackages() {
         return packages;
+    }
+
+    public void unloadPackages() {
+        this.isUnloaded = true;
     }
 }
